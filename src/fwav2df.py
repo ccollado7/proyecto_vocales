@@ -63,3 +63,28 @@ def read_audios_procesados(url):
         df1['target']=vocal
         df=pd.concat([df, df1], axis=0).reset_index(drop=True)
     return df
+
+
+def extract_praat(file_path):
+    #import praat-parselmouth
+    #from praat-parselmouth import parselmouth
+    import parselmouth
+    from parselmouth import praat
+    
+    sound = parselmouth.Sound(file_path)
+    formants = praat.call(sound, "To Formant (burg)", 0.025, 5, 8000, 0.05, 50)# 5 formantes recomendado
+    f1_list = []
+    f2_list = []
+    f_mean=[]
+    #f3_list = []
+    for i in range(2, formants.get_number_of_frames()+1):
+        f1 = formants.get_value_at_time(1, formants.get_time_step()*i)
+        f2 = formants.get_value_at_time(2, formants.get_time_step()*i)
+        f3 = formants.get_value_at_time(3, formants.get_time_step()*i)
+        f1_list.append(f1)
+        f2_list.append(f2)
+        #f3_list.append(f3)
+    f_mean.append(np.mean(f1_list))
+    f_mean.append(np.mean(f2_list))
+    #f_mean.append(np.median(f3_list))
+    return pd.DataFrame(f_mean).transpose()
