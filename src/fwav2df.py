@@ -67,7 +67,7 @@ def read_audios_procesados(url):
 
 def extract_praat(file_path):
     #import praat-parselmouth
-    #from praat-parselmouth import parselmouth
+    from praat-parselmouth import parselmouth
     import parselmouth
     from parselmouth import praat
     
