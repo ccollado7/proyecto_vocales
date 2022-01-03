@@ -67,7 +67,7 @@ def armar_dataset_audios_procesados(url):
 
 def extraer_praat(file_path):
     #import praat-parselmouth
-    from praat-parselmouth import parselmouth
+    #from praat-parselmouth import parselmouth
     import parselmouth
     from parselmouth import praat
     
