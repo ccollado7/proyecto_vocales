@@ -43,8 +43,8 @@ def armar_dataset(folder_contents,funcion):
                   'id': filename_parts[1]}
         if (funcion=='lpc_rf'):
             df1=extraer_formantes(file_path)
-        #else:
-        #    df1=extraer_praat(file_path)
+        else:
+            df1=extraer_praat(file_path)
             
         df1['target']=filename_parts[0]
         df=pd.concat([df, df1], axis=0).reset_index(drop=True)
